@@ -18,7 +18,7 @@ public class CalcController {
     public ResponseEntity<Map<String, Integer>> calculateRating(
             @PathVariable("age") int age) {
 
-        return ResponseEntity
-                .ok(Map.of("result", calcApi.calculateRating(age)));
+        Map<String, Integer> result = Map.of("result", calcApi.calcRating(age));
+        return ResponseEntity.ok(result);
     }
 }

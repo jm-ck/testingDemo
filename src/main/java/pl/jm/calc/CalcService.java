@@ -14,18 +14,19 @@ class CalcService {
     private UserApi userApi;
     private CalcRepository calcRepository;
 
-    int calculateRating(int age) {
+    int calcRating(int age) {
 
-        int rating;
+        int result = performCalculation(age);
+        calcRepository.save(new CalcEntity(UUID.randomUUID(), age, result));
+        return result;
+    }
 
+    private int performCalculation(int age) {
         if (calcValidator.ageIsValid(age)
                 && userApi.verifyUser(age)) {
-            rating = age * 2;
+            return age * 2;
         } else {
-            rating = 0;
+            return 0;
         }
-
-        calcRepository.save(new CalcEntity(UUID.randomUUID(), age, rating));
-        return rating;
     }
 }
